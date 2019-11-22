@@ -1,4 +1,4 @@
-/* Recupera la lista de clientes */
+/* Recupera la lista de contratos */
 /*DELIMITER $$ 
 
 DROP PROCEDURE IF EXISTS sp_p_lst_cactrts_all$$*/

@@ -1,4 +1,4 @@
-/* Crea un nuevo cliente. */
+/* Crea un nuevo contrato. */
 /* DELIMITER $$
 
 DROP PROCEDURE IF EXISTS sp_p_set_cactrts_Create$$ */

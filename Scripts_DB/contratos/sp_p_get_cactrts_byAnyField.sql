@@ -1,4 +1,4 @@
-/* Recupera un único registro de clientes filtrándolo por algún campo */
+/* Recupera un único registro de contratos filtrándolo por algún campo */
 /*DELIMITER $$ 
 
 DROP PROCEDURE IF EXISTS sp_p_get_cactrts_byAnyField$$*/

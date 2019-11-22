@@ -1,4 +1,4 @@
-/* Actualiza un cliente. */
+/* Actualiza un contrato. */
 /* DELIMITER $$
 
 DROP PROCEDURE IF EXISTS sp_p_set_cactrts_Update$$ */

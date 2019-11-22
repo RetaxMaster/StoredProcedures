@@ -4,7 +4,7 @@
 DROP PROCEDURE IF EXISTS sp_p_set_usrplatsurvs_Create$$ */
 
 CREATE PROCEDURE sp_p_set_usrplatsurvs_Create (
-    IN titletemplatA INT (10), 
+    IN titletemplatA VARCHAR (255), 
     IN bdytemplatA TEXT, 
     IN tipotemplatA TINYINT (1)
 )

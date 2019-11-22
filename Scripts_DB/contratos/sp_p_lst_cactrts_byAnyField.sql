@@ -1,4 +1,4 @@
-/* Recupera una lista de clientes filtrándolo por algún campo */
+/* Recupera una lista de contratos filtrándolo por algún campo */
 /*DELIMITER $$ 
 
 DROP PROCEDURE IF EXISTS sp_p_lst_cactrts_byAnyField$$*/
