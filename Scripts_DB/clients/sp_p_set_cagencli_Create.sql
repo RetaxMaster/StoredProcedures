@@ -38,7 +38,7 @@ BEGIN
         website,
         id_tipo,
         id_clasific,
-        id_calif,
+        id_calific,
         descrip,
         enabled
     ) 

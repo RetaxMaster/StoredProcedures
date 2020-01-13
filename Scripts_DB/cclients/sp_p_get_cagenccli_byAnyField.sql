@@ -7,7 +7,8 @@ CREATE PROCEDURE sp_p_get_cagenccli_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160), 
     IN enabledA TINYINT(1), 
-    IN shouldJoin TINYINT (1)
+    IN shouldJoin TINYINT (1),
+    IN extraWhere TEXT
 )
 BEGIN
 
@@ -60,6 +61,7 @@ BEGIN
         ON tbl_cacclients.id_dptoemp = tbl_gendptoemp.id_dptoemp
         WHERE (SELECT IF(" , enabledA , " = 2, TRUE, tbl_cacclients.enabled = " , enabledA , "))
         AND " , field , " LIKE ?
+        ", extraWhere , "
         LIMIT 1;");
     END IF;
 

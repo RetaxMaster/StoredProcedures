@@ -20,12 +20,16 @@ BEGIN
             tbl_acadplans.título AS id_plan,
             tbl_acadcaps.formacad AS id_cap,
             tbl_genpaises.descrip AS id_pais,
-            tbl_genprovs.descrip AS id_prov
+            tbl_genprovs.descrip AS id_prov,
+            tbl_usrprofs.nom AS nom,
+            tbl_usrprofs.ape AS ape
     	FROM tbl_acadcappapais
         INNER JOIN tbl_acadplans
         ON tbl_acadcappapais.id_plan = tbl_acadplans.id_plan
         INNER JOIN tbl_acadcaps
         ON tbl_acadcappapais.id_cap = tbl_acadcaps.id_cap
+        INNER JOIN tbl_usrprofs
+        ON tbl_acadcaps.id_user = tbl_usrprofs.id_user
         INNER JOIN tbl_genpaises
         ON tbl_acadcappapais.id_pais = tbl_genpaises.id_pais
         INNER JOIN tbl_genprovs

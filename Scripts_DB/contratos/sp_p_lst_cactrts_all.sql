@@ -26,7 +26,7 @@ BEGIN
             tbl_cacttos.enabled,
             tbl_genpaises.descrip AS id_pais,
             tbl_genprovs.descrip AS id_prov,
-            tbl_cagenclients.descrip AS id_client,
+            tbl_cagenclients.rs AS id_client,
             tbl_gentipos.descrip AS id_tipo
     	FROM tbl_cacttos
         INNER JOIN tbl_genpaises

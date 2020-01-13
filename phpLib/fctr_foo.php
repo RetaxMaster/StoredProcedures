@@ -23,8 +23,10 @@ function fctrfoo_updateRecord($fields, $id_factfoot)
 {
     if (!empty($fields)) {
         foreach ($fields as $key => $value) {
-            $SQLStrQuery = "CALL sp_p_set_cafctrfoo_Update($key, $value, $id_factfoot)";
+            if ($value !== "") {
+            $SQLStrQuery = "CALL sp_p_set_cafctrfoo_Update('$key', '$value', $id_factfoot)";
             SQLQuery($ResponsePointer, $n, $SQLStrQuery, false); // Realiza la consulta
+        }
         }
     } else {
         throw new Exception("Debes enviar al menos un campo");
@@ -44,7 +46,7 @@ function fctrfoo_recoveryAllList(&$nDocs, &$Docs, $join = false)
 function fctrfoo_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_lst_cafctrfoo_byAnyField($field, $value, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_lst_cafctrfoo_byAnyField('$field', '$value', $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }
@@ -53,7 +55,7 @@ function fctrfoo_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $join = 
 function fctrfoo_recoveryOneByAnyField(&$nDocs, &$Docs, $field, $value, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_get_cafctrfoo_byAnyField($field, $value, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_get_cafctrfoo_byAnyField('$field', '$value', $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }

@@ -6,7 +6,8 @@ DROP PROCEDURE IF EXISTS sp_p_get_capubs_byAnyField$$*/
 CREATE PROCEDURE sp_p_get_capubs_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160),  
-    IN shouldJoin TINYINT (1)
+    IN shouldJoin TINYINT (1),
+    IN extraWhere TEXT
 )
 BEGIN
 
@@ -29,6 +30,7 @@ BEGIN
         INNER JOIN tbl_cagenclients
         ON tbl_capubs.id_client = tbl_cagenclients.id_client
         WHERE " , field , " LIKE ?
+        ", extraWhere , "
         LIMIT 1;");
     END IF;
 

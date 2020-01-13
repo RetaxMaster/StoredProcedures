@@ -7,7 +7,8 @@ CREATE PROCEDURE sp_p_lst_cagencli_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160), 
     IN enabledA TINYINT (1), 
-    IN shouldJoin TINYINT (1)
+    IN shouldJoin TINYINT (1),
+    IN extraWhere TEXT
 )
 BEGIN
     
@@ -56,7 +57,8 @@ BEGIN
         INNER JOIN tbl_gencalifs
         ON tbl_cagenclients.id_calific = tbl_gencalifs.id_calif
         WHERE (SELECT IF(" , enabledA , " = 2, TRUE, tbl_cagenclients.enabled = " , enabledA , "))
-        AND " , field , " LIKE ?;");
+        AND " , field , " LIKE ?
+        ", extraWhere , ";");
     END IF;
 
     PREPARE stmt FROM @sql;

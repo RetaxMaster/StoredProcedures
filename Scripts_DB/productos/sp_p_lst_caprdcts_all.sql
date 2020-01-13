@@ -20,10 +20,13 @@ BEGIN
             tbl_caprods.tiposp,
             tbl_caprods.puvp,
             tbl_caprods.costu,
-            tbl_caimps.valorPorc AS id_imp
+            tbl_caimps.valorPorc AS id_imp,
+            tbl_genpaises.descrip AS id_pais
     	FROM tbl_caprods
         INNER JOIN tbl_caimps
-        ON tbl_caprods.id_imp = tbl_caimps.id_imp;
+        ON tbl_caprods.id_imp = tbl_caimps.id_imp
+        INNER JOIN tbl_genpaises
+        ON tbl_caprods.id_pais = tbl_genpaises.id_pais;
     END IF;
 END
 /*$$

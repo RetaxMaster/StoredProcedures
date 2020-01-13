@@ -1,13 +1,14 @@
 /* Recupera un único registro de lugares disponibles filtrándolo por algún campo */
 /*DELIMITER $$ 
 
-DROP PROCEDURE IF EXISTS sp_p_lst_caLocAts_byAnyField$$*/
+DROP PROCEDURE IF EXISTS sp_p_get_caLocAts_byAnyField$$*/
 
-CREATE PROCEDURE sp_p_lst_caLocAts_byAnyField (
+CREATE PROCEDURE sp_p_get_caLocAts_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160), 
     IN enabledA TINYINT(1), 
-    IN shouldJoin TINYINT (1)
+    IN shouldJoin TINYINT (1),
+    IN extraWhere TEXT
 )
 BEGIN
 
@@ -23,6 +24,7 @@ BEGIN
     ELSE
         SET @sql = CONCAT("
         SELECT
+            tbl_calocats.id_locat,
             tbl_calocats.cod,
             tbl_calocats.cara,
             tbl_calocats.wide,
@@ -30,7 +32,7 @@ BEGIN
             tbl_calocats.enabled,
             tbl_genpaises.descrip AS id_pais,
             tbl_genprovs.descrip AS id_prov,
-            tbl_cagenclients.descrip AS id_client,
+            tbl_cagenclients.rs AS id_client,
             tbl_genfpubs.descrip AS id_tpub
     	FROM tbl_calocats
         INNER JOIN tbl_genpaises
@@ -43,6 +45,7 @@ BEGIN
         ON tbl_calocats.id_tpub = tbl_genfpubs.id_tpub
         WHERE (SELECT IF(", enabledA ," = 2, TRUE, tbl_calocats.enabled = ", enabledA ,"))
         AND ", field ," LIKE ?
+        ", extraWhere , "
         LIMIT 1;");
     END IF;
 

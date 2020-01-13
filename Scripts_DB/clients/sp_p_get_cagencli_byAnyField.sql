@@ -7,7 +7,8 @@ CREATE PROCEDURE sp_p_get_cagencli_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160), 
     IN enabledA TINYINT(1), 
-    IN shouldJoin TINYINT (1)
+    IN shouldJoin TINYINT (1),
+    IN extraWhere TEXT
 )
 BEGIN
 
@@ -19,6 +20,7 @@ BEGIN
     	FROM tbl_cagenclients 
         WHERE (SELECT IF(" , enabledA , " = 2, TRUE, tbl_cagenclients.enabled = " , enabledA , "))
         AND " , field , " LIKE ?
+        ORDER BY id_client ASC
         LIMIT 1;");
     ELSE
         SET @sql = CONCAT("
@@ -58,6 +60,7 @@ BEGIN
         ON tbl_cagenclients.id_calific = tbl_gencalifs.id_calif
         WHERE (SELECT IF(" , enabledA , " = 2, TRUE, tbl_cagenclients.enabled = " , enabledA , "))
         AND " , field , " LIKE ?
+        ", extraWhere , "
         LIMIT 1;");
     END IF;
 

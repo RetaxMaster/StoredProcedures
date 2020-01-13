@@ -21,8 +21,10 @@ function cappapa_updateRecord($fields, $id_cappapais)
 {
     if (!empty($fields)) {
         foreach ($fields as $key => $value) {
-            $SQLStrQuery = "CALL sp_p_set_acadcappapa_Update($key, $value, $id_cappapais)";
+            if ($value !== "") {
+            $SQLStrQuery = "CALL sp_p_set_acadcappapa_Update('$key', '$value', $id_cappapais)";
             SQLQuery($ResponsePointer, $n, $SQLStrQuery, false); // Realiza la consulta
+        }
         }
     } else {
         throw new Exception("Debes enviar al menos un campo");
@@ -42,7 +44,7 @@ function cappapa_recoveryAllList(&$nDocs, &$Docs, $enabled, $join = false)
 function cappapa_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $enabled, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_lst_acadcappapa_byAnyField($field, $value, $enabled, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_lst_acadcappapa_byAnyField('$field', '$value', $enabled, $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }
@@ -51,7 +53,7 @@ function cappapa_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $enabled
 function cappapa_recoveryOneByAnyField(&$nDocs, &$Docs, $field, $value, $enabled, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_get_acadcappapa_byAnyField($field, $value, $enabled, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_get_acadcappapa_byAnyField('$field', '$value', $enabled, $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }

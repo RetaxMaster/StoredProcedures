@@ -20,8 +20,10 @@ function disp_updateRecord($fields, $id_dispa)
 {
     if (!empty($fields)) {
         foreach ($fields as $key => $value) {
-            $SQLStrQuery = "CALL sp_p_set_acaddisp_Update($key, $value, $id_dispa)";
+            if ($value !== "") {
+            $SQLStrQuery = "CALL sp_p_set_acaddisp_Update('$key', '$value', $id_dispa)";
             SQLQuery($ResponsePointer, $n, $SQLStrQuery, false); // Realiza la consulta
+        }
         }
     } else {
         throw new Exception("Debes enviar al menos un campo");
@@ -41,7 +43,7 @@ function disp_recoveryAllList(&$nDocs, &$Docs, $enabled, $join = false)
 function disp_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $enabled, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_lst_acaddisp_byAnyField($field, $value, $enabled, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_lst_acaddisp_byAnyField('$field', '$value', $enabled, $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }
@@ -50,7 +52,7 @@ function disp_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $enabled, $
 function disp_recoveryOneByAnyField(&$nDocs, &$Docs, $field, $value, $enabled, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_get_acaddisp_byAnyField($field, $value, $enabled, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_get_acaddisp_byAnyField('$field', '$value', $enabled, $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }

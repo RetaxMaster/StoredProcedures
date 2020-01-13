@@ -21,8 +21,10 @@ function fctrimp_updateRecord($fields, $id_factimp)
 {
     if (!empty($fields)) {
         foreach ($fields as $key => $value) {
-            $SQLStrQuery = "CALL sp_p_set_cafctrimp_Update($key, $value, $id_factimp)";
+            if ($value !== "") {
+            $SQLStrQuery = "CALL sp_p_set_cafctrimp_Update('$key', '$value', $id_factimp)";
             SQLQuery($ResponsePointer, $n, $SQLStrQuery, false); // Realiza la consulta
+        }
         }
     } else {
         throw new Exception("Debes enviar al menos un campo");
@@ -42,7 +44,7 @@ function fctrimp_recoveryAllList(&$nDocs, &$Docs, $join = false)
 function fctrimp_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_lst_cafctrimp_byAnyField($field, $value, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_lst_cafctrimp_byAnyField('$field', '$value', $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }
@@ -51,7 +53,7 @@ function fctrimp_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $join = 
 function fctrimp_recoveryOneByAnyField(&$nDocs, &$Docs, $field, $value, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_get_cafctrimp_byAnyField($field, $value, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_get_cafctrimp_byAnyField('$field', '$value', $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }

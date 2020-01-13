@@ -15,6 +15,7 @@ BEGIN
         WHERE (SELECT IF(enabledA = 2, TRUE, tbl_calocats.enabled = enabledA));
     ELSE
         SELECT
+            tbl_calocats.id_locat,
             tbl_calocats.cod,
             tbl_calocats.cara,
             tbl_calocats.wide,
@@ -22,7 +23,7 @@ BEGIN
             tbl_calocats.enabled,
             tbl_genpaises.descrip AS id_pais,
             tbl_genprovs.descrip AS id_prov,
-            tbl_cagenclients.descrip AS id_client,
+            tbl_cagenclients.rs AS id_client,
             tbl_genfpubs.descrip AS id_tpub
     	FROM tbl_calocats
         INNER JOIN tbl_genpaises

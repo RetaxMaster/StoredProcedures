@@ -12,6 +12,7 @@ CREATE PROCEDURE sp_p_set_acadplans_Create (
     IN objetivosA TEXT, 
     IN títuloA VARCHAR (70), 
     IN fcreacA DATE, 
+    IN urldocA VARCHAR (255), 
     IN lstenabledA TINYINT (1)
 )
 BEGIN
@@ -24,6 +25,7 @@ BEGIN
         objetivos, 
         título, 
         fcreac, 
+        urldoc,
         lstenabled
     ) 
     VALUES (
@@ -34,7 +36,8 @@ BEGIN
         perfilA, 
         objetivosA, 
         títuloA, 
-        fcreacA, 
+        fcreacA,
+        urldocA, 
         lstenabledA
     );
     

@@ -6,7 +6,8 @@ DROP PROCEDURE IF EXISTS sp_p_lst_acadcaps_byAnyField$$*/
 CREATE PROCEDURE sp_p_lst_acadcaps_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160),
-    IN shouldJoin TINYINT (1)
+    IN shouldJoin TINYINT (1),
+    IN extraWhere TEXT
 )
 BEGIN
 
@@ -26,11 +27,13 @@ BEGIN
             tbl_acadcaps.certif,
             tbl_acadcaps.exp,
             tbl_acadcaps.otros,
-            tbl_usrdacs.username AS id_user
+            tbl_usrprofs.nom AS nom,
+            tbl_usrprofs.ape AS ape
     	FROM tbl_acadcaps
-        INNER JOIN tbl_usrdacs
-        ON tbl_acadcaps.id_user = tbl_usrdacs.id_user
-        WHERE " , field , " LIKE ?;");
+        INNER JOIN tbl_usrprofs
+        ON tbl_acadcaps.id_user = tbl_usrprofs.id_user
+        WHERE " , field , " LIKE ?
+        ", extraWhere , ";");
     END IF;
     
     PREPARE stmt FROM @sql;

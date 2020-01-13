@@ -19,10 +19,11 @@ BEGIN
             tbl_acadcaps.certif,
             tbl_acadcaps.exp,
             tbl_acadcaps.otros,
-            tbl_usrdacs.username AS id_user
+            tbl_usrprofs.nom AS nom,
+            tbl_usrprofs.ape AS ape
     	FROM tbl_acadcaps
-        INNER JOIN tbl_usrdacs
-        ON tbl_acadcaps.id_user = tbl_usrdacs.id_user;
+        INNER JOIN tbl_usrprofs
+        ON tbl_acadcaps.id_user = tbl_usrprofs.id_user;
     END IF;
 END
 /*$$

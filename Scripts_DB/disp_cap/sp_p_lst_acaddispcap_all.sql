@@ -17,12 +17,15 @@ BEGIN
         SELECT
             tbl_acaddispcappais.id_dispcappais,
             tbl_acaddispcappais.enabled,
-            tbl_acadcaps.formacad AS id_cap,
+            tbl_usrprofs.nom AS nom,
+            tbl_usrprofs.ape AS ape,
             tbl_genpaises.descrip AS id_pais,
             tbl_genprovs.descrip AS id_prov
     	FROM tbl_acaddispcappais
         INNER JOIN tbl_acadcaps
         ON tbl_acaddispcappais.id_cap = tbl_acadcaps.id_cap
+        INNER JOIN tbl_usrprofs
+        ON tbl_acadcaps.id_user = tbl_usrprofs.id_user
         INNER JOIN tbl_genpaises
         ON tbl_acaddispcappais.id_pais = tbl_genpaises.id_pais
         INNER JOIN tbl_genprovs

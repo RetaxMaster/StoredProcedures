@@ -20,8 +20,10 @@ function informins_updateRecord($fields, $id_informin)
 {
     if (!empty($fields)) {
         foreach ($fields as $key => $value) {
-            $SQLStrQuery = "CALL sp_p_set_opinformins_Update($key, $value, $id_informin)";
+            if ($value !== "") {
+            $SQLStrQuery = "CALL sp_p_set_opinformins_Update('$key', '$value', $id_informin)";
             SQLQuery($ResponsePointer, $n, $SQLStrQuery, false); // Realiza la consulta
+        }
         }
     } else {
         throw new Exception("Debes enviar al menos un campo");
@@ -41,7 +43,7 @@ function informins_recoveryAllList(&$nDocs, &$Docs, $join = false)
 function informins_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_lst_opinformins_byAnyField($field, $value, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_lst_opinformins_byAnyField('$field', '$value', $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }
@@ -50,7 +52,7 @@ function informins_recoveryAllByAnyField(&$nDocs, &$Docs, $field, $value, $join 
 function informins_recoveryOneByAnyField(&$nDocs, &$Docs, $field, $value, $join = false)
 { // true or false
     $tinyint = (int) $join;
-    $SQLStrQuery = "CALL sp_p_get_opinformins_byAnyField($field, $value, $tinyint)";
+    $SQLStrQuery = "CALL sp_p_get_opinformins_byAnyField('$field', '$value', $tinyint)";
     SQLQuery($ResponsePointer, $nDocs, $SQLStrQuery, true); // Realiza la consulta
     ConvertPointerToArray($ResponsePointer, $Docs, $nDocs, 2); // Pertenece a dbmngmtAdmin.php
 }

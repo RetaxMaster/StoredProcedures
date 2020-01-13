@@ -10,7 +10,8 @@ CREATE PROCEDURE sp_p_set_caprdcts_Create (
     IN tipospA CHAR (1),
     IN puvpA FLOAT,
     IN id_impA INT (10),
-    IN costuA FLOAT
+    IN costuA FLOAT,
+    IN id_paisA INT (10)
 )
 BEGIN
 	INSERT INTO tbl_caprods (
@@ -20,7 +21,8 @@ BEGIN
         tiposp,
         puvp,
         id_imp,
-        costu
+        costu,
+        id_pais
     ) 
     VALUES (
         codA, 
@@ -29,7 +31,8 @@ BEGIN
         tipospA,
         puvpA,
         id_impA,
-        costuA
+        costuA,
+        id_paisA
     );
     
 END
