@@ -1,9 +1,9 @@
 /* Recupera una lista de lugares disponibles filtrándolo por algún campo */
 /*DELIMITER $$ 
 
-DROP PROCEDURE IF EXISTS sp_p_lst_ccafps_byAnyField$$*/
+DROP PROCEDURE IF EXISTS sp_p_lst_cafps_byAnyField$$*/
 
-CREATE PROCEDURE sp_p_lst_ccafps_byAnyField (
+CREATE PROCEDURE sp_p_lst_cafps_byAnyField (
     IN field VARCHAR (160), 
     IN val VARCHAR (160), 
     IN enabledA TINYINT(1), 

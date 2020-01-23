@@ -10,7 +10,7 @@ CREATE PROCEDURE sp_p_set_acadplans_Create (
     IN prerrequisitosA TEXT, 
     IN perfilA TEXT, 
     IN objetivosA TEXT, 
-    IN títuloA VARCHAR (70), 
+    IN tituloA VARCHAR (70), 
     IN fcreacA DATE, 
     IN urldocA VARCHAR (255), 
     IN lstenabledA TINYINT (1)
@@ -23,7 +23,7 @@ BEGIN
         prerrequisitos, 
         perfil, 
         objetivos, 
-        título, 
+        titulo, 
         fcreac, 
         urldoc,
         lstenabled
@@ -35,7 +35,7 @@ BEGIN
         prerrequisitosA, 
         perfilA, 
         objetivosA, 
-        títuloA, 
+        tituloA, 
         fcreacA,
         urldocA, 
         lstenabledA

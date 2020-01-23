@@ -26,13 +26,13 @@ BEGIN
             tbl_usrrols.descrip AS rol,
             tbl_genpaises.descrip AS id_pais
     	FROM tbl_usrdacs
-        INNER JOIN tbl_usrprofs
+        LEFT JOIN tbl_usrprofs
         ON tbl_usrdacs.id_user = tbl_usrprofs.id_user
-        INNER JOIN tbl_usrcompanies
+        LEFT JOIN tbl_usrcompanies
         ON tbl_usrprofs.id_company = tbl_usrcompanies.id_company
-        INNER JOIN tbl_genpaises
+        LEFT JOIN tbl_genpaises
         ON tbl_usrcompanies.id_pais = tbl_genpaises.id_pais
-        INNER JOIN tbl_usrrols
+        LEFT JOIN tbl_usrrols
         ON tbl_usrdacs.id_rol = tbl_usrrols.id_rol
         WHERE (SELECT IF(enabledA = 2, TRUE, tbl_usrdacs.enabled = enabledA));
     END IF;

@@ -4,20 +4,16 @@
 DROP PROCEDURE IF EXISTS sp_p_lst_cacothdrs_byAnyField$$*/
 
 CREATE PROCEDURE sp_p_lst_cacothdrs_byAnyField (
-    IN field VARCHAR (160), 
-    IN val VARCHAR (160),
     IN shouldJoin TINYINT (1),
-    IN extraWhere TEXT
+    IN whereSQL TEXT
 )
 BEGIN
-
-    SET @val = CONCAT("%" , val , "%");
     
     IF shouldJoin = 0 THEN
         SET @sql = CONCAT("
 	    SELECT * 
     	FROM tbl_cacothdrs 
-        WHERE ", field , " LIKE ?;");
+        ", whereSQL , ";");
     ELSE
         SET @sql = CONCAT("
         SELECT 
@@ -35,7 +31,9 @@ BEGIN
             tbl_cagenclients.rs AS id_client,
             tbl_genpaises.descrip AS id_pais,
             tbl_genprovs.descrip AS id_prov,
-            ctrycodefijo.descrip AS id_ctrycodefijo
+            ctrycodefijo.descrip AS id_ctrycodefijo,
+            tbl_cacotfoots.total AS total,
+            tbl_cacotfoots.observ AS observ
     	FROM tbl_cacothdrs
         INNER JOIN tbl_cagenclients
         ON tbl_cacothdrs.id_client = tbl_cagenclients.id_client
@@ -43,14 +41,15 @@ BEGIN
         ON tbl_cacothdrs.id_pais = tbl_genpaises.id_pais
         INNER JOIN tbl_genprovs
         ON tbl_cacothdrs.id_prov = tbl_genprovs.id_prov
+        INNER JOIN tbl_cacotfoots
+        ON tbl_cacothdrs.id_cot = tbl_cacotfoots.id_cot
         INNER JOIN tbl_genctrycodes AS ctrycodefijo
         ON tbl_cacothdrs.id_ctrycodefijo = ctrycodefijo.id_ctrycode
-        WHERE " , field , " LIKE ?
-        ", extraWhere , ";");
+        ", whereSQL , ";");
     END IF;
     
     PREPARE stmt FROM @sql;
-    EXECUTE stmt USING @val;
+    EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
 
 END
