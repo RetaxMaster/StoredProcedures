@@ -20,7 +20,7 @@ BEGIN
             tbl_acadcalcapinsts.firmcierredoc,
             tbl_cagenclients.rs AS id_client,
             tbl_cacttos.codctto AS id_ctto,
-            tbl_acadplans.título AS id_plan,
+            tbl_acadplans.titulo AS id_plan,
             tbl_usrprofs.nom AS cap_nom,
             tbl_usrprofs.ape AS cap_ape,
             tbl_genpaises.descrip AS id_pais,

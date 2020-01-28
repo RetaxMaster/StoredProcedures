@@ -17,7 +17,7 @@ BEGIN
         SELECT
             tbl_acadcappapais.id_cappapais,
             tbl_acadcappapais.enabled,
-            tbl_acadplans.título AS id_plan,
+            tbl_acadplans.titulo AS id_plan,
             tbl_acadcaps.formacad AS id_cap,
             tbl_genpaises.descrip AS id_pais,
             tbl_genprovs.descrip AS id_prov,

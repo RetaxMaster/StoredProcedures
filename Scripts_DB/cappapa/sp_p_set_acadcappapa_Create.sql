@@ -4,8 +4,8 @@
 DROP PROCEDURE IF EXISTS sp_p_set_acadcappapa_Create$$ */
 
 CREATE PROCEDURE sp_p_set_acadcappapa_Create (
-    IN id_capA INT (10), 
-    IN id_planA INT (10),
+    IN id_planA INT (10), 
+    IN id_capA INT (10),
     IN id_paisA INT (10), 
     IN id_provA INT (10), 
     IN enabledA TINYINT (1)

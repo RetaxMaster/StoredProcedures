@@ -16,7 +16,6 @@ BEGIN
         SELECT 
             tbl_usrdacs.id_dac,
             tbl_usrdacs.username,
-            tbl_usrdacs.passwd,
             tbl_usrdacs.enabled,
             tbl_usrdacs.externo,
             tbl_usrdacs.rol_modified,
